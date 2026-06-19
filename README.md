@@ -56,15 +56,12 @@ flowchart LR
 
 ### 面向人类：复制 Prompt 安装
 
-把下面这段话发给你的 OpenCode / Claude Code / Codex agent，它会自动完成安装：
+把下面这段话发给你的 LLM agent，它会自动完成安装：
 
-> 请帮我安装 OpenCode skill `weekly-report`。仓库地址是 `https://github.com/ChrefTech/weekly-report`。下载 `SKILL.md` 到 `~/.agents/skills/weekly-report/SKILL.md`（Windows 用户放到 `%USERPROFILE%\.agents\skills\weekly-report\SKILL.md`）。如果目录不存在则创建。完成后验证文件可读，并确认 skill 已生效。
-
-你的 agent 会：
-1. 检测操作系统
-2. 创建 `weekly-report` 目录
-3. 下载 `SKILL.md`
-4. 验证安装成功
+```
+请帮我安装这个 OpenCode skill：https://github.com/ChrefTech/weekly-report
+先读 https://raw.githubusercontent.com/ChrefTech/weekly-report/main/INSTALL.md 了解安装步骤，然后执行。
+```
 
 ### 面向 LLM Agent
 
