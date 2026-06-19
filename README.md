@@ -58,9 +58,8 @@ flowchart LR
 
 把下面这段话发给你的 LLM agent，它会自动完成安装：
 
-```
-请帮我安装这个 OpenCode skill：https://github.com/ChrefTech/weekly-report
-先读 https://raw.githubusercontent.com/ChrefTech/weekly-report/main/INSTALL.md 了解安装步骤，然后执行。
+```markdown
+参考[INSTALL.md](https://raw.githubusercontent.com/ChrefTech/weekly-report/main/INSTALL.md) 安装weekly-report这个skill
 ```
 
 ### 面向 LLM Agent
