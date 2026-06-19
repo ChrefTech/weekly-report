@@ -17,7 +17,7 @@
 
 ---
 
-## What It Does
+## 功能
 
 当你对 OpenCode 说「写周报」时，这个 skill 会：
 
@@ -33,7 +33,7 @@ week-report/2026-06-08_2026-06-14/
 └── 03-协调与帮助.md       ← 跨项目依赖、资源需求、优先级建议
 ```
 
-## Why Direct DB Access
+## 为什么直接读数据库
 
 内置的 `session_list` 工具默认只返回**当前工作目录**的 session。如果你在不同项目之间切换（例如 `~/Documents/geo`、`~/.ws/OMRobot`），它会漏掉其他项目的 session。
 
@@ -50,31 +50,43 @@ flowchart LR
     G --> H[生成 3 个 md 文件]
 ```
 
-## Installation
+## 安装
 
-### Quick Install
+两种安装方式，选一种即可。
 
-```bash
-git clone https://github.com/ChrefTech/weekly-report.git ~/.agents/skills/weekly-report
-```
+### 面向人类：复制 Prompt 安装
 
-Restart OpenCode. Done.
+把下面这段话发给你的 OpenCode / Claude Code / Codex agent，它会自动完成安装：
 
-### Manual Download
+> 请帮我安装 OpenCode skill `weekly-report`。仓库地址是 `https://github.com/ChrefTech/weekly-report`。下载 `SKILL.md` 到 `~/.agents/skills/weekly-report/SKILL.md`（Windows 用户放到 `%USERPROFILE%\.agents\skills\weekly-report\SKILL.md`）。如果目录不存在则创建。完成后验证文件可读，并确认 skill 已生效。
+
+你的 agent 会：
+1. 检测操作系统
+2. 创建 `weekly-report` 目录
+3. 下载 `SKILL.md`
+4. 验证安装成功
+
+### 面向 LLM Agent
+
+如果你是 LLM agent 在执行安装，参考 [INSTALL.md](INSTALL.md)，里面有完整的 Linux / Windows PowerShell 安装步骤和依赖检查逻辑。
+
+### 手动安装（终端）
 
 ```bash
 # Linux / macOS
+mkdir -p ~/.agents/skills/weekly-report
 curl -fsSL https://raw.githubusercontent.com/ChrefTech/weekly-report/main/SKILL.md \
   -o ~/.agents/skills/weekly-report/SKILL.md
 
 # Windows PowerShell
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.agents\skills\weekly-report"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ChrefTech/weekly-report/main/SKILL.md" \
   -OutFile "$env:USERPROFILE\.agents\skills\weekly-report\SKILL.md"
 ```
 
-See [INSTALL.md](INSTALL.md) for detailed platform-specific instructions.
+安装后重启 OpenCode 即可生效。
 
-## Usage
+## 使用方式
 
 直接对 OpenCode 说：
 
@@ -87,7 +99,7 @@ See [INSTALL.md](INSTALL.md) for detailed platform-specific instructions.
 
 输出默认保存到 `~/Documents/week-report/<日期范围>/`。
 
-## Output Example
+## 输出示例
 
 ### 01-工作周报.md
 
@@ -119,17 +131,17 @@ See [INSTALL.md](INSTALL.md) for detailed platform-specific instructions.
 | 感知模型产出 | OMRobot (6/22) | piper_ros D435i 管线 | 85 项未启动 |
 ```
 
-## Requirements
+## 依赖
 
-| Tool | Linux | Windows |
+| 工具 | Linux | Windows |
 |------|-------|---------|
-| `sqlite3` | Pre-installed | `winget install SQLite.SQLite` |
-| `python3` | Pre-installed | [python.org](https://python.org) |
+| `sqlite3` | 预装 | `winget install SQLite.SQLite` |
+| `python3` | 预装 | [python.org](https://python.org) |
 | `rg` (ripgrep) | `apt install ripgrep` | `winget install BurntSushi.ripgrep.MSVC` |
 
-Skill auto-falls back to `grep` / `findstr` if ripgrep is unavailable.
+如果 ripgrep 不可用，skill 会自动回退到 `grep` / `findstr`。
 
-## How It Works
+## 工作原理
 
 ```mermaid
 sequenceDiagram
@@ -151,20 +163,22 @@ sequenceDiagram
     Agent-->>User: 输出路径 + 统计总览
 ```
 
-## Project Structure
+## 项目结构
 
 ```
 weekly-report/
-├── SKILL.md          ← 核心 skill 定义（273 行）
-├── INSTALL.md        ← LLM 导向的安装指南
+├── .github/
+│   └── logo.svg
+├── SKILL.md          ← 核心 skill 定义
+├── INSTALL.md        ← LLM Agent 安装指南
 ├── LICENSE           ← Apache 2.0
 └── README.md         ← 本文件
 ```
 
-## Contributing
+## 贡献
 
 欢迎提交 Issue 和 PR。如果你发现了新的 session 数据源、改进了查询效率，或者增加了新的报告维度，请贡献回来。
 
-## License
+## 许可证
 
 Apache 2.0 © 2026 [ChrefTech](https://github.com/ChrefTech)
